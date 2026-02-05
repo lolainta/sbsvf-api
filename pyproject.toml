@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "gRPC API contract for CARLA simulator"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = [
-    "grpcio>=1.76.0",
-]
+dependencies = ["grpcio>=1.76.0", "protobuf>=6.33.5"]
+
+[project.optional-dependencies]
+dev = ["grpcio-tools"]
