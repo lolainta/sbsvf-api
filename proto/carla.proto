@@ -6,6 +6,7 @@ import "control.proto";
 import "object.proto";
 import "scenario.proto";
 import "path.proto";
+import "config.proto";
 
 service CarlaSim {
   // Check if the server is alive
@@ -14,14 +15,17 @@ service CarlaSim {
   // Initialize the simulation (e.g., load maps, set weather)
   rpc Init(InitRequest) returns (InitResponse);
 
+  // Reset the simulation with a new scenario
+  rpc Reset(ResetRequest) returns (ResetResponse);
+
   // Advance the simulation by one step with the provided control command
   rpc Step(StepRequest) returns (StepResponse);
 
   // Stop the simulation
   rpc Stop(Empty) returns (Empty);
 
-  // Reset the simulation with a new scenario
-  rpc Reset(ResetRequest) returns (ResetResponse);
+  // Check if the simulation should quit
+  rpc ShouldQuit(Empty) returns (ShouldQuitResponse);
 }
 
 message Empty {}
@@ -29,7 +33,8 @@ message Empty {}
 message Pong { string msg = 1; }
 
 message InitRequest {
-  Path config = 1;
+  Config config = 1;
+  double dt     = 2;
 }
 
 message InitResponse {
@@ -43,7 +48,7 @@ message StepRequest {
 }
 
 message StepResponse {
-  repeated ObjectStat objects = 1;
+  repeated ObjectState objects = 1;
 }
 
 message ResetRequest {
@@ -53,5 +58,10 @@ message ResetRequest {
 }
 
 message ResetResponse {
-  repeated ObjectStat objects = 1;
+  repeated ObjectState objects = 1;
+}
+
+
+message ShouldQuitResponse {
+  bool should_quit = 1;
 }

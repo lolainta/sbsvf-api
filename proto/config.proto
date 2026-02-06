@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package carla_api;
+
+import "google/protobuf/any.proto";
+
+message Config{
+  map<string, google.protobuf.Any> config = 1;
+}

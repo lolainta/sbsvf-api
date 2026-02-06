@@ -56,7 +56,7 @@ message Shape{
   repeated Vertex vertices = 3; // ignored for bounding box and cylinder; list of vertices
 }
 
-message ObjectStat{
+message ObjectState{
   RoadObjectType  type      = 1;
   ObjectKinematic kinematic = 2;
   optional Shape  shape     = 3;

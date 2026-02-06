@@ -44,6 +44,11 @@ class CarlaSimStub(object):
                 request_serializer=carla__pb2.InitRequest.SerializeToString,
                 response_deserializer=carla__pb2.InitResponse.FromString,
                 _registered_method=True)
+        self.Reset = channel.unary_unary(
+                '/carla_api.CarlaSim/Reset',
+                request_serializer=carla__pb2.ResetRequest.SerializeToString,
+                response_deserializer=carla__pb2.ResetResponse.FromString,
+                _registered_method=True)
         self.Step = channel.unary_unary(
                 '/carla_api.CarlaSim/Step',
                 request_serializer=carla__pb2.StepRequest.SerializeToString,
@@ -54,10 +59,10 @@ class CarlaSimStub(object):
                 request_serializer=carla__pb2.Empty.SerializeToString,
                 response_deserializer=carla__pb2.Empty.FromString,
                 _registered_method=True)
-        self.Reset = channel.unary_unary(
-                '/carla_api.CarlaSim/Reset',
-                request_serializer=carla__pb2.ResetRequest.SerializeToString,
-                response_deserializer=carla__pb2.ResetResponse.FromString,
+        self.ShouldQuit = channel.unary_unary(
+                '/carla_api.CarlaSim/ShouldQuit',
+                request_serializer=carla__pb2.Empty.SerializeToString,
+                response_deserializer=carla__pb2.ShouldQuitResponse.FromString,
                 _registered_method=True)
 
 
@@ -78,6 +83,13 @@ class CarlaSimServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Reset(self, request, context):
+        """Reset the simulation with a new scenario
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def Step(self, request, context):
         """Advance the simulation by one step with the provided control command
         """
@@ -92,8 +104,8 @@ class CarlaSimServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def Reset(self, request, context):
-        """Reset the simulation with a new scenario
+    def ShouldQuit(self, request, context):
+        """Check if the simulation should quit
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -112,6 +124,11 @@ def add_CarlaSimServicer_to_server(servicer, server):
                     request_deserializer=carla__pb2.InitRequest.FromString,
                     response_serializer=carla__pb2.InitResponse.SerializeToString,
             ),
+            'Reset': grpc.unary_unary_rpc_method_handler(
+                    servicer.Reset,
+                    request_deserializer=carla__pb2.ResetRequest.FromString,
+                    response_serializer=carla__pb2.ResetResponse.SerializeToString,
+            ),
             'Step': grpc.unary_unary_rpc_method_handler(
                     servicer.Step,
                     request_deserializer=carla__pb2.StepRequest.FromString,
@@ -122,10 +139,10 @@ def add_CarlaSimServicer_to_server(servicer, server):
                     request_deserializer=carla__pb2.Empty.FromString,
                     response_serializer=carla__pb2.Empty.SerializeToString,
             ),
-            'Reset': grpc.unary_unary_rpc_method_handler(
-                    servicer.Reset,
-                    request_deserializer=carla__pb2.ResetRequest.FromString,
-                    response_serializer=carla__pb2.ResetResponse.SerializeToString,
+            'ShouldQuit': grpc.unary_unary_rpc_method_handler(
+                    servicer.ShouldQuit,
+                    request_deserializer=carla__pb2.Empty.FromString,
+                    response_serializer=carla__pb2.ShouldQuitResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -193,6 +210,33 @@ class CarlaSim(object):
             _registered_method=True)
 
     @staticmethod
+    def Reset(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/carla_api.CarlaSim/Reset',
+            carla__pb2.ResetRequest.SerializeToString,
+            carla__pb2.ResetResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
     def Step(request,
             target,
             options=(),
@@ -247,7 +291,7 @@ class CarlaSim(object):
             _registered_method=True)
 
     @staticmethod
-    def Reset(request,
+    def ShouldQuit(request,
             target,
             options=(),
             channel_credentials=None,
@@ -260,9 +304,9 @@ class CarlaSim(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/carla_api.CarlaSim/Reset',
-            carla__pb2.ResetRequest.SerializeToString,
-            carla__pb2.ResetResponse.FromString,
+            '/carla_api.CarlaSim/ShouldQuit',
+            carla__pb2.Empty.SerializeToString,
+            carla__pb2.ShouldQuitResponse.FromString,
             options,
             channel_credentials,
             insecure,
