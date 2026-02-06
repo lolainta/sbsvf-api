@@ -1,0 +1,19 @@
+syntax = "proto2";
+
+package carla_api;
+
+import "google/protobuf/any.proto";
+
+enum CtrlMode {
+  NONE           = 0;
+  TRAJECTORY     = 1;
+  THROTTLE_STEER = 2;
+  VELOCITY_STEER = 3;
+  WAYPOINTS      = 4;
+  POSITION       = 5;
+}
+
+message CtrlCmd {
+  required CtrlMode                mode    = 1;
+  map<string, google.protobuf.Any> payload = 2;
+}

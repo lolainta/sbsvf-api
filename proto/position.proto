@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package carla_api;
+
+message Position{
+  LanePosition  lane  = 1;
+  WorldPosition world = 2;
+}
+
+message WorldPosition{
+  double x          = 1;
+  double y          = 2;
+  double z          = 3;
+  double h          = 4;
+  double p          = 5;
+  double r          = 6;
+  double h_relative = 7;
+}
+
+message LanePosition{
+  int32          road_id     = 1;
+  int32          lane_id     = 2;
+  double         s           = 3;
+  double         offset      = 4;
+  optional int32 junction_id = 5; // -1 if not a junction
+}

@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package carla_api;
+
+enum RoadObjectType {
+  UNKNOWN     = 0;
+  CAR         = 1;
+  TRUCK       = 2;
+  BUS         = 3;
+  SEMITRAILER = 4;
+  TRAILER     = 5;
+  MOTORCYCLE  = 6;
+  BICYCLE     = 7;
+  PEDESTRIAN  = 8;
+  VAN         = 9;
+  TRAIN       = 10;
+  TRAM        = 11;
+  WHEEL_CHAIR = 12;
+  ANIMAL      = 13;
+}
+
+enum ShapeType {
+  BOUNDING_BOX = 0;
+  CLYINDER     = 1;
+  POLYGON      = 2;
+}
+
+message ObjectKinematic {
+    // timestamp in nanoseconds
+  int64  time_ns = 1;
+  double x       = 2;
+  double y       = 3;
+  double z       = 4;
+  double yaw     = 5;
+
+  double speed        = 6;
+  double acceleration = 7;
+
+  double yaw_rate         = 8;
+  double yaw_acceleration = 9;
+}
+
+message Shape{
+  ShapeType type = 4;
+  message Dimention {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+  }
+  Dimention dimension = 2; // length, width, height for bounding box; radius, height for cylinder; ignored for polygon
+  message Vertex {
+    double x = 1;
+    double y = 2;
+    double z = 3;
+  }
+  repeated Vertex vertices = 3; // ignored for bounding box and cylinder; list of vertices
+}
+
+message ObjectStat{
+  RoadObjectType  type      = 1;
+  ObjectKinematic kinematic = 2;
+  optional Shape  shape     = 3;
+}
