@@ -42,12 +42,12 @@ message ObjectKinematic {
 
 message Shape{
   ShapeType type = 4;
-  message Dimention {
+  message Dimension {
     double x = 1;
     double y = 2;
     double z = 3;
   }
-  Dimention dimensions = 2; // length, width, height for bounding box; radius, height for cylinder; ignored for polygon
+  Dimension dimensions = 2; // length, width, height for bounding box; radius, height for cylinder; ignored for polygon
   message Vertex {
     double x = 1;
     double y = 2;
