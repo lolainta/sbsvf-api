@@ -8,9 +8,9 @@ enum CtrlMode {
   NONE           = 0;
   TRAJECTORY     = 1;
   THROTTLE_STEER = 2;
-  VELOCITY_STEER = 3;
-  WAYPOINTS      = 4;
-  POSITION       = 5;
+  WAYPOINTS      = 3;
+  POSITION       = 4;
+  ACKERMANN      = 5;
 }
 
 message CtrlCmd {
