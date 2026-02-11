@@ -3,8 +3,11 @@ syntax = "proto3";
 package sbsvf_api;
 
 import "config.proto";
+import "control.proto";
 import "empty.proto";
+import "object.proto";
 import "pong.proto";
+import "scenario.proto";
 
 service AvServer {
   // Check if the server is alive
@@ -12,6 +15,18 @@ service AvServer {
 
   // Initialize the AV system with configuration parameters
   rpc Init(AvServerMessages.InitRequest) returns (AvServerMessages.InitResponse);
+
+  // Reset the AV system with a new scenario and initial observation
+  rpc Reset(AvServerMessages.ResetRequest) returns (AvServerMessages.ResetResponse);
+
+  // Advance the AV system by one step with the provided observation
+  rpc Step(AvServerMessages.StepRequest) returns (AvServerMessages.StepResponse);
+
+  // Stop the AV system
+  rpc Stop(Empty) returns (Empty);
+
+  // Check if the AV system should quit
+  rpc ShouldQuit(Empty) returns (AvServerMessages.ShouldQuitResponse);
 }
 
 message AvServerMessages {
@@ -22,5 +37,28 @@ message AvServerMessages {
   message InitResponse {
     bool   success = 1;
     string msg     = 2;
+  }
+
+  message ResetRequest {
+    string               output_dir          = 1;
+    ScenarioPack         scenario_pack       = 2;
+    repeated ObjectState initial_observation = 3;
+  }
+
+  message ResetResponse {
+    CtrlCmd ctrl_cmd = 1;
+  }
+
+  message StepRequest {
+    repeated ObjectState observation  = 1;
+    int64                timestamp_ns = 2;
+  }
+
+  message StepResponse {
+    CtrlCmd ctrl_cmd = 1;
+  }
+
+  message ShouldQuitResponse {
+    bool should_quit = 1;
   }
 }

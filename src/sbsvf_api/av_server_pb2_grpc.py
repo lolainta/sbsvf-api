@@ -46,6 +46,26 @@ class AvServerStub(object):
                 request_serializer=av__server__pb2.AvServerMessages.InitRequest.SerializeToString,
                 response_deserializer=av__server__pb2.AvServerMessages.InitResponse.FromString,
                 _registered_method=True)
+        self.Reset = channel.unary_unary(
+                '/sbsvf_api.AvServer/Reset',
+                request_serializer=av__server__pb2.AvServerMessages.ResetRequest.SerializeToString,
+                response_deserializer=av__server__pb2.AvServerMessages.ResetResponse.FromString,
+                _registered_method=True)
+        self.Step = channel.unary_unary(
+                '/sbsvf_api.AvServer/Step',
+                request_serializer=av__server__pb2.AvServerMessages.StepRequest.SerializeToString,
+                response_deserializer=av__server__pb2.AvServerMessages.StepResponse.FromString,
+                _registered_method=True)
+        self.Stop = channel.unary_unary(
+                '/sbsvf_api.AvServer/Stop',
+                request_serializer=empty__pb2.Empty.SerializeToString,
+                response_deserializer=empty__pb2.Empty.FromString,
+                _registered_method=True)
+        self.ShouldQuit = channel.unary_unary(
+                '/sbsvf_api.AvServer/ShouldQuit',
+                request_serializer=empty__pb2.Empty.SerializeToString,
+                response_deserializer=av__server__pb2.AvServerMessages.ShouldQuitResponse.FromString,
+                _registered_method=True)
 
 
 class AvServerServicer(object):
@@ -65,6 +85,34 @@ class AvServerServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def Reset(self, request, context):
+        """Reset the AV system with a new scenario and initial observation
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Step(self, request, context):
+        """Advance the AV system by one step with the provided observation
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Stop(self, request, context):
+        """Stop the AV system
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ShouldQuit(self, request, context):
+        """Check if the AV system should quit
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_AvServerServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -77,6 +125,26 @@ def add_AvServerServicer_to_server(servicer, server):
                     servicer.Init,
                     request_deserializer=av__server__pb2.AvServerMessages.InitRequest.FromString,
                     response_serializer=av__server__pb2.AvServerMessages.InitResponse.SerializeToString,
+            ),
+            'Reset': grpc.unary_unary_rpc_method_handler(
+                    servicer.Reset,
+                    request_deserializer=av__server__pb2.AvServerMessages.ResetRequest.FromString,
+                    response_serializer=av__server__pb2.AvServerMessages.ResetResponse.SerializeToString,
+            ),
+            'Step': grpc.unary_unary_rpc_method_handler(
+                    servicer.Step,
+                    request_deserializer=av__server__pb2.AvServerMessages.StepRequest.FromString,
+                    response_serializer=av__server__pb2.AvServerMessages.StepResponse.SerializeToString,
+            ),
+            'Stop': grpc.unary_unary_rpc_method_handler(
+                    servicer.Stop,
+                    request_deserializer=empty__pb2.Empty.FromString,
+                    response_serializer=empty__pb2.Empty.SerializeToString,
+            ),
+            'ShouldQuit': grpc.unary_unary_rpc_method_handler(
+                    servicer.ShouldQuit,
+                    request_deserializer=empty__pb2.Empty.FromString,
+                    response_serializer=av__server__pb2.AvServerMessages.ShouldQuitResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -133,6 +201,114 @@ class AvServer(object):
             '/sbsvf_api.AvServer/Init',
             av__server__pb2.AvServerMessages.InitRequest.SerializeToString,
             av__server__pb2.AvServerMessages.InitResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Reset(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/sbsvf_api.AvServer/Reset',
+            av__server__pb2.AvServerMessages.ResetRequest.SerializeToString,
+            av__server__pb2.AvServerMessages.ResetResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Step(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/sbsvf_api.AvServer/Step',
+            av__server__pb2.AvServerMessages.StepRequest.SerializeToString,
+            av__server__pb2.AvServerMessages.StepResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Stop(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/sbsvf_api.AvServer/Stop',
+            empty__pb2.Empty.SerializeToString,
+            empty__pb2.Empty.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def ShouldQuit(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/sbsvf_api.AvServer/ShouldQuit',
+            empty__pb2.Empty.SerializeToString,
+            av__server__pb2.AvServerMessages.ShouldQuitResponse.FromString,
             options,
             channel_credentials,
             insecure,

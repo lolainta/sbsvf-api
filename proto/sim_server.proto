@@ -41,15 +41,6 @@ message SimServerMessages {
     string msg     = 2;
   }
 
-  message StepRequest {
-    CtrlCmd ctrl_cmd     = 1;
-    int64   timestamp_ns = 2;
-  }
-
-  message StepResponse {
-    repeated ObjectState objects = 1;
-  }
-
   message ResetRequest {
     string              output_dir    = 1;
     ScenarioPack        scenario_pack = 2;
@@ -57,6 +48,15 @@ message SimServerMessages {
   }
 
   message ResetResponse {
+    repeated ObjectState objects = 1;
+  }
+
+  message StepRequest {
+    CtrlCmd ctrl_cmd     = 1;
+    int64   timestamp_ns = 2;
+  }
+
+  message StepResponse {
     repeated ObjectState objects = 1;
   }
 
