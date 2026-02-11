@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package sbsvf_api;
+
+import "empty.proto";
+import "pong.proto";
+
+service AvServer {
+  // Check if the server is alive
+  rpc Ping(Empty) returns (Pong);
+}

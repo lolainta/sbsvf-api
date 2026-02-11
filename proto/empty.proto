@@ -1,0 +1,5 @@
+syntax = "proto3";
+
+package sbsvf_api;
+
+message Empty {}

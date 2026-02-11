@@ -3,9 +3,11 @@
 import grpc
 import warnings
 
+from . import empty_pb2 as empty__pb2
+from . import pong_pb2 as pong__pb2
 from . import sim_server_pb2 as sim__server__pb2
 
-GRPC_GENERATED_VERSION = '1.78.0'
+GRPC_GENERATED_VERSION = '1.76.0'
 GRPC_VERSION = grpc.__version__
 _version_not_supported = False
 
@@ -36,8 +38,8 @@ class SimServerStub(object):
         """
         self.Ping = channel.unary_unary(
                 '/sbsvf_api.SimServer/Ping',
-                request_serializer=sim__server__pb2.Empty.SerializeToString,
-                response_deserializer=sim__server__pb2.Pong.FromString,
+                request_serializer=empty__pb2.Empty.SerializeToString,
+                response_deserializer=pong__pb2.Pong.FromString,
                 _registered_method=True)
         self.Init = channel.unary_unary(
                 '/sbsvf_api.SimServer/Init',
@@ -56,12 +58,12 @@ class SimServerStub(object):
                 _registered_method=True)
         self.Stop = channel.unary_unary(
                 '/sbsvf_api.SimServer/Stop',
-                request_serializer=sim__server__pb2.Empty.SerializeToString,
-                response_deserializer=sim__server__pb2.Empty.FromString,
+                request_serializer=empty__pb2.Empty.SerializeToString,
+                response_deserializer=empty__pb2.Empty.FromString,
                 _registered_method=True)
         self.ShouldQuit = channel.unary_unary(
                 '/sbsvf_api.SimServer/ShouldQuit',
-                request_serializer=sim__server__pb2.Empty.SerializeToString,
+                request_serializer=empty__pb2.Empty.SerializeToString,
                 response_deserializer=sim__server__pb2.ShouldQuitResponse.FromString,
                 _registered_method=True)
 
@@ -116,8 +118,8 @@ def add_SimServerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Ping': grpc.unary_unary_rpc_method_handler(
                     servicer.Ping,
-                    request_deserializer=sim__server__pb2.Empty.FromString,
-                    response_serializer=sim__server__pb2.Pong.SerializeToString,
+                    request_deserializer=empty__pb2.Empty.FromString,
+                    response_serializer=pong__pb2.Pong.SerializeToString,
             ),
             'Init': grpc.unary_unary_rpc_method_handler(
                     servicer.Init,
@@ -136,12 +138,12 @@ def add_SimServerServicer_to_server(servicer, server):
             ),
             'Stop': grpc.unary_unary_rpc_method_handler(
                     servicer.Stop,
-                    request_deserializer=sim__server__pb2.Empty.FromString,
-                    response_serializer=sim__server__pb2.Empty.SerializeToString,
+                    request_deserializer=empty__pb2.Empty.FromString,
+                    response_serializer=empty__pb2.Empty.SerializeToString,
             ),
             'ShouldQuit': grpc.unary_unary_rpc_method_handler(
                     servicer.ShouldQuit,
-                    request_deserializer=sim__server__pb2.Empty.FromString,
+                    request_deserializer=empty__pb2.Empty.FromString,
                     response_serializer=sim__server__pb2.ShouldQuitResponse.SerializeToString,
             ),
     }
@@ -170,8 +172,8 @@ class SimServer(object):
             request,
             target,
             '/sbsvf_api.SimServer/Ping',
-            sim__server__pb2.Empty.SerializeToString,
-            sim__server__pb2.Pong.FromString,
+            empty__pb2.Empty.SerializeToString,
+            pong__pb2.Pong.FromString,
             options,
             channel_credentials,
             insecure,
@@ -278,8 +280,8 @@ class SimServer(object):
             request,
             target,
             '/sbsvf_api.SimServer/Stop',
-            sim__server__pb2.Empty.SerializeToString,
-            sim__server__pb2.Empty.FromString,
+            empty__pb2.Empty.SerializeToString,
+            empty__pb2.Empty.FromString,
             options,
             channel_credentials,
             insecure,
@@ -305,7 +307,7 @@ class SimServer(object):
             request,
             target,
             '/sbsvf_api.SimServer/ShouldQuit',
-            sim__server__pb2.Empty.SerializeToString,
+            empty__pb2.Empty.SerializeToString,
             sim__server__pb2.ShouldQuitResponse.FromString,
             options,
             channel_credentials,

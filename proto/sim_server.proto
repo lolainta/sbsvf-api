@@ -2,11 +2,13 @@ syntax = "proto3";
 
 package sbsvf_api;
 
-import "control.proto";
-import "object.proto";
-import "scenario.proto";
-import "path.proto";
 import "config.proto";
+import "control.proto";
+import "empty.proto";
+import "object.proto";
+import "path.proto";
+import "pong.proto";
+import "scenario.proto";
 
 service SimServer {
   // Check if the server is alive
@@ -27,10 +29,6 @@ service SimServer {
   // Check if the simulation should quit
   rpc ShouldQuit(Empty) returns (ShouldQuitResponse);
 }
-
-message Empty {}
-
-message Pong { string msg = 1; }
 
 message InitRequest {
   Config config = 1;
