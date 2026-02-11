@@ -1,10 +1,10 @@
 [project]
-name = "carla-api"
-version = "0.1.0"
-description = "gRPC API contract for CARLA simulator"
+name = "sbsvf-api"
+version = "0.1.1"
+description = "gRPC (SIM/AV) API contract for SBSVF"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = ["grpcio>=1.76.0", "protobuf>=6.33.5"]
 
-[project.optional-dependencies]
-dev = ["grpcio-tools"]
+[dependency-groups]
+dev = ["grpcio-tools>=1.76.0"]

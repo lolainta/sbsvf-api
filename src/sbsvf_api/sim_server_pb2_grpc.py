@@ -3,7 +3,7 @@
 import grpc
 import warnings
 
-from . import carla_pb2 as carla__pb2
+from . import sim_server_pb2 as sim__server__pb2
 
 GRPC_GENERATED_VERSION = '1.78.0'
 GRPC_VERSION = grpc.__version__
@@ -18,14 +18,14 @@ except ImportError:
 if _version_not_supported:
     raise RuntimeError(
         f'The grpc package installed is at version {GRPC_VERSION},'
-        + ' but the generated code in carla_pb2_grpc.py depends on'
+        + ' but the generated code in sim_server_pb2_grpc.py depends on'
         + f' grpcio>={GRPC_GENERATED_VERSION}.'
         + f' Please upgrade your grpc module to grpcio>={GRPC_GENERATED_VERSION}'
         + f' or downgrade your generated code using grpcio-tools<={GRPC_VERSION}.'
     )
 
 
-class CarlaSimStub(object):
+class SimServerStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -35,38 +35,38 @@ class CarlaSimStub(object):
             channel: A grpc.Channel.
         """
         self.Ping = channel.unary_unary(
-                '/carla_api.CarlaSim/Ping',
-                request_serializer=carla__pb2.Empty.SerializeToString,
-                response_deserializer=carla__pb2.Pong.FromString,
+                '/sbsvf_api.SimServer/Ping',
+                request_serializer=sim__server__pb2.Empty.SerializeToString,
+                response_deserializer=sim__server__pb2.Pong.FromString,
                 _registered_method=True)
         self.Init = channel.unary_unary(
-                '/carla_api.CarlaSim/Init',
-                request_serializer=carla__pb2.InitRequest.SerializeToString,
-                response_deserializer=carla__pb2.InitResponse.FromString,
+                '/sbsvf_api.SimServer/Init',
+                request_serializer=sim__server__pb2.InitRequest.SerializeToString,
+                response_deserializer=sim__server__pb2.InitResponse.FromString,
                 _registered_method=True)
         self.Reset = channel.unary_unary(
-                '/carla_api.CarlaSim/Reset',
-                request_serializer=carla__pb2.ResetRequest.SerializeToString,
-                response_deserializer=carla__pb2.ResetResponse.FromString,
+                '/sbsvf_api.SimServer/Reset',
+                request_serializer=sim__server__pb2.ResetRequest.SerializeToString,
+                response_deserializer=sim__server__pb2.ResetResponse.FromString,
                 _registered_method=True)
         self.Step = channel.unary_unary(
-                '/carla_api.CarlaSim/Step',
-                request_serializer=carla__pb2.StepRequest.SerializeToString,
-                response_deserializer=carla__pb2.StepResponse.FromString,
+                '/sbsvf_api.SimServer/Step',
+                request_serializer=sim__server__pb2.StepRequest.SerializeToString,
+                response_deserializer=sim__server__pb2.StepResponse.FromString,
                 _registered_method=True)
         self.Stop = channel.unary_unary(
-                '/carla_api.CarlaSim/Stop',
-                request_serializer=carla__pb2.Empty.SerializeToString,
-                response_deserializer=carla__pb2.Empty.FromString,
+                '/sbsvf_api.SimServer/Stop',
+                request_serializer=sim__server__pb2.Empty.SerializeToString,
+                response_deserializer=sim__server__pb2.Empty.FromString,
                 _registered_method=True)
         self.ShouldQuit = channel.unary_unary(
-                '/carla_api.CarlaSim/ShouldQuit',
-                request_serializer=carla__pb2.Empty.SerializeToString,
-                response_deserializer=carla__pb2.ShouldQuitResponse.FromString,
+                '/sbsvf_api.SimServer/ShouldQuit',
+                request_serializer=sim__server__pb2.Empty.SerializeToString,
+                response_deserializer=sim__server__pb2.ShouldQuitResponse.FromString,
                 _registered_method=True)
 
 
-class CarlaSimServicer(object):
+class SimServerServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def Ping(self, request, context):
@@ -112,47 +112,47 @@ class CarlaSimServicer(object):
         raise NotImplementedError('Method not implemented!')
 
 
-def add_CarlaSimServicer_to_server(servicer, server):
+def add_SimServerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'Ping': grpc.unary_unary_rpc_method_handler(
                     servicer.Ping,
-                    request_deserializer=carla__pb2.Empty.FromString,
-                    response_serializer=carla__pb2.Pong.SerializeToString,
+                    request_deserializer=sim__server__pb2.Empty.FromString,
+                    response_serializer=sim__server__pb2.Pong.SerializeToString,
             ),
             'Init': grpc.unary_unary_rpc_method_handler(
                     servicer.Init,
-                    request_deserializer=carla__pb2.InitRequest.FromString,
-                    response_serializer=carla__pb2.InitResponse.SerializeToString,
+                    request_deserializer=sim__server__pb2.InitRequest.FromString,
+                    response_serializer=sim__server__pb2.InitResponse.SerializeToString,
             ),
             'Reset': grpc.unary_unary_rpc_method_handler(
                     servicer.Reset,
-                    request_deserializer=carla__pb2.ResetRequest.FromString,
-                    response_serializer=carla__pb2.ResetResponse.SerializeToString,
+                    request_deserializer=sim__server__pb2.ResetRequest.FromString,
+                    response_serializer=sim__server__pb2.ResetResponse.SerializeToString,
             ),
             'Step': grpc.unary_unary_rpc_method_handler(
                     servicer.Step,
-                    request_deserializer=carla__pb2.StepRequest.FromString,
-                    response_serializer=carla__pb2.StepResponse.SerializeToString,
+                    request_deserializer=sim__server__pb2.StepRequest.FromString,
+                    response_serializer=sim__server__pb2.StepResponse.SerializeToString,
             ),
             'Stop': grpc.unary_unary_rpc_method_handler(
                     servicer.Stop,
-                    request_deserializer=carla__pb2.Empty.FromString,
-                    response_serializer=carla__pb2.Empty.SerializeToString,
+                    request_deserializer=sim__server__pb2.Empty.FromString,
+                    response_serializer=sim__server__pb2.Empty.SerializeToString,
             ),
             'ShouldQuit': grpc.unary_unary_rpc_method_handler(
                     servicer.ShouldQuit,
-                    request_deserializer=carla__pb2.Empty.FromString,
-                    response_serializer=carla__pb2.ShouldQuitResponse.SerializeToString,
+                    request_deserializer=sim__server__pb2.Empty.FromString,
+                    response_serializer=sim__server__pb2.ShouldQuitResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'carla_api.CarlaSim', rpc_method_handlers)
+            'sbsvf_api.SimServer', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
-    server.add_registered_method_handlers('carla_api.CarlaSim', rpc_method_handlers)
+    server.add_registered_method_handlers('sbsvf_api.SimServer', rpc_method_handlers)
 
 
  # This class is part of an EXPERIMENTAL API.
-class CarlaSim(object):
+class SimServer(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
@@ -169,9 +169,9 @@ class CarlaSim(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/carla_api.CarlaSim/Ping',
-            carla__pb2.Empty.SerializeToString,
-            carla__pb2.Pong.FromString,
+            '/sbsvf_api.SimServer/Ping',
+            sim__server__pb2.Empty.SerializeToString,
+            sim__server__pb2.Pong.FromString,
             options,
             channel_credentials,
             insecure,
@@ -196,9 +196,9 @@ class CarlaSim(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/carla_api.CarlaSim/Init',
-            carla__pb2.InitRequest.SerializeToString,
-            carla__pb2.InitResponse.FromString,
+            '/sbsvf_api.SimServer/Init',
+            sim__server__pb2.InitRequest.SerializeToString,
+            sim__server__pb2.InitResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -223,9 +223,9 @@ class CarlaSim(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/carla_api.CarlaSim/Reset',
-            carla__pb2.ResetRequest.SerializeToString,
-            carla__pb2.ResetResponse.FromString,
+            '/sbsvf_api.SimServer/Reset',
+            sim__server__pb2.ResetRequest.SerializeToString,
+            sim__server__pb2.ResetResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -250,9 +250,9 @@ class CarlaSim(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/carla_api.CarlaSim/Step',
-            carla__pb2.StepRequest.SerializeToString,
-            carla__pb2.StepResponse.FromString,
+            '/sbsvf_api.SimServer/Step',
+            sim__server__pb2.StepRequest.SerializeToString,
+            sim__server__pb2.StepResponse.FromString,
             options,
             channel_credentials,
             insecure,
@@ -277,9 +277,9 @@ class CarlaSim(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/carla_api.CarlaSim/Stop',
-            carla__pb2.Empty.SerializeToString,
-            carla__pb2.Empty.FromString,
+            '/sbsvf_api.SimServer/Stop',
+            sim__server__pb2.Empty.SerializeToString,
+            sim__server__pb2.Empty.FromString,
             options,
             channel_credentials,
             insecure,
@@ -304,9 +304,9 @@ class CarlaSim(object):
         return grpc.experimental.unary_unary(
             request,
             target,
-            '/carla_api.CarlaSim/ShouldQuit',
-            carla__pb2.Empty.SerializeToString,
-            carla__pb2.ShouldQuitResponse.FromString,
+            '/sbsvf_api.SimServer/ShouldQuit',
+            sim__server__pb2.Empty.SerializeToString,
+            sim__server__pb2.ShouldQuitResponse.FromString,
             options,
             channel_credentials,
             insecure,
