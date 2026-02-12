@@ -31,7 +31,10 @@ service AvServer {
 
 message AvServerMessages {
   message InitRequest {
-    Config config = 1;
+    Config       config        = 1;
+    string       output_dir    = 2;
+    ScenarioPack scenario_pack = 3;
+
   }
 
   message InitResponse {
