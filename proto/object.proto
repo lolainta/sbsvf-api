@@ -21,7 +21,7 @@ enum RoadObjectType {
 
 enum ShapeType {
   BOUNDING_BOX = 0;
-  CLYINDER     = 1;
+  CYLINDER     = 1;
   POLYGON      = 2;
 }
 
